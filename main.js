@@ -1,3 +1,13 @@
+const firstName = document.getElementById('first-name'),
+      lastName = document.getElementById('last-name'),
+      zipCode = document.getElementById('zip-code'),
+      phoneNumber = document.getElementById('phone-number'),
+      email = document.getElementById('email'),
+      password = document.getElementById('password'),
+      repeatPassword = document.getElementById('repeat-password'),
+      submitButton = document.querySelector('#validate-form button[type=submit]');
+
+
 const regexObj = {
   name: /^[a-z]$/i,
   zip: /^[0-9]{5}$/,
