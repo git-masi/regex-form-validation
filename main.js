@@ -3,7 +3,7 @@ const inputFields = document.querySelectorAll('#validate-form input');
 const regexObj = {
   'name': /^[a-z]{2,40}$/i,
   'zip': /^[0-9]{5}(-[0-9]{4})?$/,
-  'phone': /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
+  'phone': /^\(?\d{3}\)?[-\. ]?[0-9]{3}[-\. ]?[0-9]{4}$/,
   'email': /^([\w\.-]+)@([\w\.-]+)\.([a-zA-z]{2,5})$/,
   'password': /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 }
