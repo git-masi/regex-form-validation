@@ -4,8 +4,8 @@ const regexObj = {
   'name': /^[a-z]{2,40}$/i,
   'zip': /^[0-9]{5}(-[0-9]{4})?$/,
   'phone': /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
-  'email': /^[\w]*@[\w]*\.[a-z]$/i,
-  'password': /^([0-9]{1,}[A-Z]{1,}[!@#$%^&*-]{1,}[^\s]){8,16}$/
+  'email': /^([\w\.-]+)@([\w\.-]+)\.([a-zA-z]{2,5})$/,
+  'password': /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 }
 
 function validateInput(el, regex) {
@@ -44,7 +44,7 @@ function validateInputFailed(inputElement, regex) {
       clearHelpDiv(parent);
       break
     case 'email':
-      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} please enter valid email`;
+      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} please enter a valid email`;
       parent.appendChild(helpDiv);
       clearHelpDiv(parent);
       break
