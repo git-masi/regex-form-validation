@@ -59,7 +59,7 @@ function validateInputFailed(inputElement, regex) {
       clearHelpDiv(parent);
       break
     case 'password-two':
-      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must be 8-16 characters with one number, one capital letter, and one special character`;
+      helpDiv.textContent = `Passwords must match`;
       parent.appendChild(helpDiv);
       clearHelpDiv(parent);
       break      
@@ -77,6 +77,8 @@ function clearHelpDiv(parent) {
 function checkSamePassword(p2, regex) {
   const p1 = document.getElementById('password');
   if (p1.value !== p2.value) {
+    p2.classList.remove('valid');
+    p2.classList.add('invalid');
     validateInputFailed(p2, regex)
   } else {
     p2.classList.remove('invalid');
@@ -92,3 +94,14 @@ window.addEventListener('load', () => {
 });
 
 submitButton.addEventListener('click', finalValidation);
+
+function finalValidation(e) {
+  if (!document.getElementById('validate-form').querySelector('.invalid')) {
+    return
+  } else {
+    // modal
+    inputFields.forEach(el => el.value = '');
+  }
+
+  e.preventDefault();
+}
