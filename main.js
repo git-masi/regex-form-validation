@@ -76,7 +76,7 @@ function clearHelpDiv(parent) {
 
 function checkSamePassword(p2, regex) {
   const p1 = document.getElementById('password');
-  if (p1.value !== p2.value) {
+  if (p2.value === '' || p1.value !== p2.value) {
     p2.classList.remove('valid');
     p2.classList.add('invalid');
     validateInputFailed(p2, regex)
@@ -96,12 +96,24 @@ window.addEventListener('load', () => {
 submitButton.addEventListener('click', finalValidation);
 
 function finalValidation(e) {
+  inputFields.forEach(el => {
+    let elRegex = el.getAttribute('data-regex');
+    validateInput(el, elRegex);
+  })
   if (!document.getElementById('validate-form').querySelector('.invalid')) {
     return
   } else {
-    // modal
-    inputFields.forEach(el => el.value = '');
+    // console.log('what is going on')
+    // var elems = document.querySelectorAll('.modal');
+    // var instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
+    // inputFields.forEach(el => el.value = '');
+    // submitButton.classList.add('modal-trigger');
   }
 
   e.preventDefault();
 }
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   var elems = document.querySelectorAll('.modal');
+//   var instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
+// });
