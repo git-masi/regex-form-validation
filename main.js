@@ -1,4 +1,5 @@
-const inputFields = document.querySelectorAll('#validate-form input');
+const inputFields = document.querySelectorAll('#validate-form input'),
+      submitButton = document.querySelector('#validate-form button[type=submit]');
 
 const regexObj = {
   'name': /^[a-z]{2,40}$/i,
@@ -9,6 +10,10 @@ const regexObj = {
 }
 
 function validateInput(el, regex) {
+  if (regex === 'password-two') {
+    checkSamePassword(el, regex);
+    return
+  }
   let regexValue = regexObj[regex];
   if (regexValue.test(el.value)) {
     el.classList.remove('invalid');
@@ -53,6 +58,11 @@ function validateInputFailed(inputElement, regex) {
       parent.appendChild(helpDiv);
       clearHelpDiv(parent);
       break
+    case 'password-two':
+      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must be 8-16 characters with one number, one capital letter, and one special character`;
+      parent.appendChild(helpDiv);
+      clearHelpDiv(parent);
+      break      
     default:
       label.textContent = 'something went wrong';
   }
@@ -64,11 +74,21 @@ function clearHelpDiv(parent) {
   }, 3000);
 }
 
+function checkSamePassword(p2, regex) {
+  const p1 = document.getElementById('password');
+  if (p1.value !== p2.value) {
+    validateInputFailed(p2, regex)
+  } else {
+    p2.classList.remove('invalid');
+    p2.classList.add('valid');
+  }
+}
+
 window.addEventListener('load', () => {
   inputFields.forEach(el => {
     let elRegex = el.getAttribute('data-regex');
-    el.addEventListener('blur', () => {
-      validateInput(el, elRegex);
-    });
+    el.addEventListener('blur', () => validateInput(el, elRegex));
   });
 });
+
+submitButton.addEventListener('click', finalValidation);
