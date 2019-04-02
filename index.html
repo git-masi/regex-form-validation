@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>RegExp Form Validation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Materialize icon font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Materialize compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+<body>
+  <div class="container cyan lighten-5">
+    <header class="row cyan lighten-2">
+      <h1 class="col s12 center-align">Regular Expression Validation</h1>
+    </header>
+
+    <div id="validate-form" class="row">
+      <div class="row">
+        <div class="col s12">
+          <h5>Please Verify Your Information</h5>
+        </div>
+      </div>
+
+      <div class="input-field col s12 m6">
+        <input id="first-name" type="text" autofocus required>
+        <label for="first-name">First Name</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="last-name" type="text" required>
+        <label for="last-name">Last Name</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="zip-code" type="text" required>
+        <label for="zip-code">Zip Code</label>
+      </div>
+      <div class="input-field col s12 m6">
+        <input id="phone-number" type="text" required>
+        <label for="phone-number">Phone Number</label>
+      </div>
+      <div class="input-field col s12">
+          <input id="email" type="email" required>
+          <label for="email">email</label>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" required>
+          <label for="password">New Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="repeat-password" type="password" required>
+          <label for="repeat-password">Re-enter New Password</label>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    
+  <!-- Materialize compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Custom JS -->
+  <script src="main.js"></script>
+</body>
+</html>
