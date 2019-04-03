@@ -1,7 +1,8 @@
 const inputFields = document.querySelectorAll('#validate-form input'),
       submitButton = document.querySelector('#validate-form button[type=submit]');
 
-const regexObj = {
+// change to const later
+let regexObj = {
   'name': /^[a-z]{2,40}$/i,
   'zip': /^[0-9]{5}(-[0-9]{4})?$/,
   'phone': /^\(?\d{3}\)?[-\. ]?[0-9]{3}[-\. ]?[0-9]{4}$/,
@@ -14,7 +15,9 @@ function validateInput(el, regex) {
     checkSamePassword(el, regex);
     return
   }
+
   let regexValue = regexObj[regex];
+  
   if (regexValue.test(el.value)) {
     el.classList.remove('invalid');
     el.classList.add('valid');
@@ -35,37 +38,27 @@ function validateInputFailed(inputElement, regex) {
   switch (regex) {
     case 'name':
       helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must be 2-40 characters`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
       break
     case 'zip':
-      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must use format 12345 or 12345-1234`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
+      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} please enter a valid zip code`;
       break
     case 'phone':
-      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must use format 555-555-5555`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
+      helpDiv.textContent = `${inputElement.nextElementSibling.textContent} please enter a valid phone number`;
       break
     case 'email':
       helpDiv.textContent = `${inputElement.nextElementSibling.textContent} please enter a valid email`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
       break
     case 'password':
       helpDiv.textContent = `${inputElement.nextElementSibling.textContent} must be 8-16 characters with one number, one capital letter, and one special character`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
       break
     case 'password-two':
       helpDiv.textContent = `Passwords must match`;
-      parent.appendChild(helpDiv);
-      clearHelpDiv(parent);
       break      
     default:
       label.textContent = 'something went wrong';
   }
+  parent.appendChild(helpDiv);
+  clearHelpDiv(parent);
 }
 
 function clearHelpDiv(parent) {
@@ -96,24 +89,19 @@ window.addEventListener('load', () => {
 submitButton.addEventListener('click', finalValidation);
 
 function finalValidation(e) {
+  e.preventDefault();
   inputFields.forEach(el => {
     let elRegex = el.getAttribute('data-regex');
     validateInput(el, elRegex);
   })
-  if (!document.getElementById('validate-form').querySelector('.invalid')) {
+  if (document.getElementById('validate-form').querySelector('.invalid')) {
     return
   } else {
-    // console.log('what is going on')
-    // var elems = document.querySelectorAll('.modal');
-    // var instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
-    // inputFields.forEach(el => el.value = '');
-    // submitButton.classList.add('modal-trigger');
+    const elems = document.querySelectorAll('.modal');
+    const instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
+
+    submitButton.classList.add('modal-trigger');
+    
+    inputFields.forEach(el => el.value = '');
   }
-
-  e.preventDefault();
 }
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   var elems = document.querySelectorAll('.modal');
-//   var instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
-// });
