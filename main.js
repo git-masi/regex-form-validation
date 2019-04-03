@@ -1,8 +1,7 @@
 const inputFields = document.querySelectorAll('#validate-form input'),
       submitButton = document.querySelector('#validate-form button[type=submit]');
 
-// change to const later
-let regexObj = {
+const regexObj = {
   'name': /^[a-z]{2,40}$/i,
   'zip': /^[0-9]{5}(-[0-9]{4})?$/,
   'phone': /^\(?\d{3}\)?[-\. ]?[0-9]{3}[-\. ]?[0-9]{4}$/,
@@ -101,7 +100,7 @@ function finalValidation(e) {
     const instances = M.Modal.init(elems, {dismissible: true}, true, 'success');
 
     submitButton.classList.add('modal-trigger');
-    
+
     inputFields.forEach(el => el.value = '');
   }
 }
